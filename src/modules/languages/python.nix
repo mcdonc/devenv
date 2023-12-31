@@ -10,22 +10,7 @@ let
     );
 
   readlink = "${pkgs.coreutils}/bin/readlink -f ";
-  package = pkgs.callPackage "${pkgs.path}/pkgs/development/interpreters/python/wrapper.nix" {
-    python = cfg.package;
-    requiredPythonModules = cfg.package.pkgs.requiredPythonModules;
-    makeWrapperArgs = [
-      "--prefix"
-      "LD_LIBRARY_PATH"
-      ":"
-      libraries
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
-      "--prefix"
-      "DYLD_LIBRARY_PATH"
-      ":"
-      libraries
-    ];
-  };
-
+  package = cfg.package;
   requirements = pkgs.writeText "requirements.txt" (
     if lib.isPath cfg.venv.requirements
     then builtins.readFile cfg.venv.requirements

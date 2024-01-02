@@ -143,7 +143,7 @@ in
 
     manylinux.enable = lib.mkOption {
       type = lib.types.bool;
-      default = pkgs.stdenv.isLinux;
+      default = false; # pkgs.stdenv.isLinux;
       description = ''
         Whether to install manylinux2014 libraries.
 

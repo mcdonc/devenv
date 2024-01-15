@@ -1,4 +1,8 @@
 inputs:
+  nixpkgs:
+    url: github:mcdonc/nixpkgs/nixpkgs-unstable-python-env-venv-fixed-pkgs
+  devenv:
+    url: github:cachix/devenv/python-rewrite
   fenix:
     url: github:nix-community/fenix
     inputs:

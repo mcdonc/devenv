@@ -1,8 +1,8 @@
 inputs:
   nixpkgs:
-    url: github:mcdonc/nixpkgs/nixpkgs-unstable-python-env-venv-fixed-pkgs
+    url: github:mcdonc/nixpkgs/nixpkgs-unstable-python-env-venv
   devenv:
-    url: github:mcdonc/devenv/python-rewrite
+    url: github:cachix/devenv/python-rewrite
   overlays:
     url: path:./overlays
     overlays:

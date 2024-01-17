@@ -681,8 +681,10 @@ def add(ctx, name, url, follows):
 )
 @click.argument("names", nargs=-1)
 @click.option("--debug", is_flag=True, help="Run tests in debug mode.")
+@click.option(
+    "--keep-going", is_flag=True, help="Continue running tests if one fails.")
 @click.pass_context
-def test(ctx, debug, names):
+def test(ctx, debug, keep_going, names):
     ctx.invoke(assemble)
     with log_task("Gathering tests", newline=False):
         tests = json.loads(run_nix("eval .#devenv.tests --json"))
@@ -790,6 +792,8 @@ def test(ctx, debug, names):
                                 p.kill()
                 except BaseException as e:
                     log_error(f"Test {name} failed.")
+                    if keep_going:
+                        continue
                     if debug:
                         log(
                             "Entering shell because of the --debug flag:",

@@ -1,6 +1,6 @@
 # TODO: build using Nix: https://github.com/microsoft/vscode-dev-containers/blob/main/containers/alpine/.devcontainer/base.Dockerfile
 FROM mcr.microsoft.com/devcontainers/base:jammy
-ARG VERSION=latest
+ARG VERSION=python-rewrite
 
 ADD nix.conf /nix.conf
 ADD nix-entrypoint.sh /nix-entrypoint.sh
@@ -26,7 +26,7 @@ RUN /nix-entrypoint.sh sleep 5 \
  && sudo setfacl -k /tmp \
  && nix profile install nixpkgs#direnv nixpkgs#cachix \
  && cachix use devenv \
- && nix profile install github:cachix/devenv/$VERSION \
+ && nix profile install github:mcdonc/devenv/$VERSION \
  && rm -rf ~/.cache/nix \
  && sudo /nix/var/nix/profiles/default/bin/nix-collect-garbage --delete-old \
  && chown -R root:nixbld /nix
